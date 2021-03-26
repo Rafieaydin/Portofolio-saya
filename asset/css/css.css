@@ -1,0 +1,67 @@
+    /* .navbar{
+        background-image: linear-gradient(to right, #000428, #4e4376);
+        box-shadow: rgb(0, 0, 0, 0.2px);
+        
+    } */
+    html {
+        scroll-behavior: smooth;
+    }
+    html::-webkit-scrollbar {
+        display: none;
+    }
+    html {
+        -ms-overflow-style: none;
+    }
+
+    section#home{
+        background-image: linear-gradient(to right, #232526, #414345);
+        color: white;
+        height: 100%;
+        padding-bottom: 110px;
+
+    }
+    div.image img{
+        margin-top: 40px;
+    }
+
+    section#skils {
+        background-image: linear-gradient(to right, #232526, #414345);
+        color: white;
+        height: 100%;
+    }
+    .font14 {
+        font-size: 14px;
+    }
+
+    section#projects{
+        background-image: linear-gradient(to right, #232526, #414345);
+        color: white;
+        height: 570px;
+    }
+    .project-container {
+        overflow-y: scroll;
+        height: 450px;
+        -ms-overflow-style: none;
+    }
+    .project-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .card-link {
+        text-decoration: none;
+    }
+    div.card:hover{
+        box-shadow: 2px 2px 10px rgb(0, 0, 0, 0.2);
+    }
+    .myprojk{
+        margin-top: -40px;
+    }
+
+    section#contact {
+        background-image: linear-gradient(to right, #232526, #414345);
+        color: white;
+    }
+    section#footer {
+        background-image: linear-gradient(to right, #232526, #414345);
+        color: white;
+    }
