@@ -1,8 +1,7 @@
-    /* .navbar{
-        background-image: linear-gradient(to right, #000428, #4e4376);
-        box-shadow: rgb(0, 0, 0, 0.2px);
-        
-    } */
+    *{
+        margin: 0;
+        padding: 0;
+    }
     html {
         scroll-behavior: smooth;
     }
@@ -12,7 +11,25 @@
     html {
         -ms-overflow-style: none;
     }
+    nav.navbar{
+        position: fixed;
+        width: 100%;
+        z-index: 1;
+    }
 
+    i.fab:hover{
+        color: black;
+    }
+    a.nav-link {
+        color: #7f8c8d !important;
+    }
+    a.nav-link:hover {
+        color: white !important;
+    }
+    a.active{
+        color: white !important;
+    }
+  
     section#home{
         background-image: linear-gradient(to right, #232526, #414345);
         color: white;
@@ -22,6 +39,12 @@
     }
     div.image img{
         margin-top: 40px;
+        border: 10px solid #232526;
+    }
+
+    div.image img:hover {
+        border: solid #232526;
+        margin-top: 40px;
     }
 
     section#skils {
@@ -30,32 +53,92 @@
         height: 100%;
     }
     .font14 {
-        font-size: 14px;
+        font-size: 12px;
+        width: 280px;
     }
+    div.container-skils {
+        overflow-y: auto;
+        height: 345px;
+        margin: 0;
+        /* -ms-overflow-style: none; */
+    }    
+    .container-skils::-webkit-scrollbar {
+        width: 20px;
+    }
+    /* Track */
+    .container-skils::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    .container-skils::-webkit-scrollbar-thumb {
+        background: #232526;
+        border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    .container-skils::-webkit-scrollbar-thumb:hover {
+        background: #232526;
+    }
+        @media only screen and (max-width: 768px) {
+            div.container-skils {
+                overflow-y: scroll;
+                height: 1000px;
+                -ms-overflow-style: none;
+            }
+        }
+    
+    /* div.badge-tag {
+        width: 50%;
+    } */
 
     section#projects{
         background-image: linear-gradient(to right, #232526, #414345);
         color: white;
-        height: 570px;
+        height: 100%;
     }
     .project-container {
-        overflow-y: scroll;
-        height: 450px;
-        -ms-overflow-style: none;
+        overflow-y: auto;
+        height: 500px;
+        /* -ms-overflow-style: none; */
     }
-    .project-container::-webkit-scrollbar {
-        display: none;
-    }
+        .project-container::-webkit-scrollbar {
+            width: 20px;
+        }
+
+     /* Track */
+        .project-container::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px grey;
+            border-radius: 10px;
+        }
+
+        /* Handle */
+        .project-container::-webkit-scrollbar-thumb {
+            background: #232526;
+            border-radius: 10px;
+        }
 
     .card-link {
         text-decoration: none;
     }
     div.card:hover{
-        box-shadow: 2px 2px 10px rgb(0, 0, 0, 0.2);
+        box-shadow: 10px 10px 10px rgb(0, 0, 0, 0.2);
+        background: #232526;
+    }
+    div.card img:hover{
+        opacity: 0.5s;
     }
     .myprojk{
         margin-top: -40px;
     }
+    div.card{
+        background: transparent;
+        background: #414345;
+        z-index: 0;
+        box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.2);
+    }
+   
 
     section#contact {
         background-image: linear-gradient(to right, #232526, #414345);
@@ -64,4 +147,138 @@
     section#footer {
         background-image: linear-gradient(to right, #232526, #414345);
         color: white;
+    }
+    div.container{
+        margin: 0 auto;
+    }
+    /* conact form */
+    h1 {
+        font-family: 'Poppins', sans-serif, 'arial';
+        font-weight: 600;
+        font-size: 30px;
+        color: white;
+        text-align: center;
+    }
+
+    h4 {
+        font-family: 'Roboto', sans-serif, 'arial';
+        font-weight: 400;
+        font-size: 15px;
+        color: #9b9b9b;
+    }
+
+    /* ///// inputs /////*/
+
+    input:focus~label,
+    textarea:focus~label,
+    input:valid~label,
+    textarea:valid~label {
+        font-size: 0.75em;
+        color: #999;
+        top: -5px;
+        -webkit-transition: all 0.225s ease;
+        transition: all 0.225s ease;
+    }
+
+    .styled-input {
+        float: left;
+        width: 293px;
+        margin: 1rem 0;
+        position: relative;
+        border-radius: 4px;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .styled-input {
+            width: 100%;
+        }
+    }
+
+    .styled-input label {
+        color: #999;
+        padding: 0.3rem 20px 0.5rem 20px;
+        position: absolute;
+        top: 10px;
+        left: 0;
+        -webkit-transition: all 0.25s ease;
+        transition: all 0.25s ease;
+        pointer-events: none;
+    }
+
+    .styled-input.wide {
+        width: 650px;
+        max-width: 100%;
+    }
+
+    input,
+    textarea {
+        padding: 15px;
+        border: 0;
+        width: 100%;
+        font-size: 1rem;
+        background-color: #232526;
+        color: white;
+        border-radius: 4px;
+    }
+
+    input:focus,
+    textarea:focus {
+        outline: 0;
+    }
+
+    input:focus~span,
+    textarea:focus~span {
+        width: 100%;
+        -webkit-transition: all 0.075s ease;
+        transition: all 0.075s ease;
+    }
+
+    textarea {
+        width: 100%;
+        min-height: 15em;
+    }
+
+    .input-container {
+        width: 500px;
+        max-width: 100%;
+        margin: 5px auto 25px auto;
+    }
+
+    .submit-btn {
+        float: right;
+        padding: 7px 35px;
+        border-radius: 60px;
+        display: inline-block;
+        background-color: #4b8cfb;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.06),
+            0 2px 10px 0 rgba(0, 0, 0, 0.07);
+        -webkit-transition: all 300ms ease;
+        transition: all 300ms ease;
+    }
+
+    .submit-btn:hover {
+        transform: translateY(1px);
+        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.10),
+            0 1px 1px 0 rgba(0, 0, 0, 0.09);
+    }
+
+    @media (max-width: 768px) {
+        .submit-btn {
+            width: 100%;
+            float: none;
+            text-align: center;
+        }
+    }
+
+    input[type=checkbox]+label {
+        color: #ccc;
+        font-style: italic;
+    }
+
+    input[type=checkbox]:checked+label {
+        color: #f00;
+        font-style: normal;
     }

@@ -1,6 +1,9 @@
 <?php
-require 'koneksi.php';
+require '../koneksi.php';
 session_start();
+!isset($_SESSION['user']) ? header("Location: ../index.php") : '';
+$name = $_SESSION['user']['username'];
+
 if (isset($_POST['submit'])) {
     if (tambahContact($_POST) > 0) {
         $_SESSION['sukses'] = 'Pesan anda sudah tersampaikan';
@@ -25,14 +28,14 @@ GROUP BY skill.id");
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>My Portofolio</title>
-    <link rel="stylesheet" href="asset/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../asset/node_modules/bootstrap/dist/css/bootstrap.min.css">
     </link>
-    <script src="asset/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="asset/pakage/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="asset/css/css.css">
+    <script src="../asset/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="../asset/pakage/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../asset/css/css.css">
     </link>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="asset/js/js.js"></script>
+    <script src="../asset/js/js.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
 
 </head>
@@ -59,8 +62,13 @@ GROUP BY skill.id");
                     <li class="nav-item ms-3">
                         <a class="nav-link text-white" href="#contact">Contact</a>
                     </li>
-                    <li class="nav-item ms-3 me-5">
-                        <a class="nav-link text-white" href="auth/login.php"><i class="fas fa-user"></i> &ensp; Login</a>
+                    <li class="nav-item dropdown ms-3 me-5">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user"></i> &ensp; <?= $name ?>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="../auth/logout.php">Logout</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -95,7 +103,7 @@ GROUP BY skill.id");
                 </div>
                 <div class="col-md-4">
                     <div class="image  mt-5 text-center">
-                        <img src="asset/image/image.jpeg" class=" w-75 ms-5 me-5 rounded-pill shadow " alt="">
+                        <img src="../asset/image/image.jpeg" class=" w-75 ms-5 me-5 rounded-pill shadow " alt="">
                     </div>
                 </div>
             </div>
