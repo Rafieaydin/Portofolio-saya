@@ -9,11 +9,15 @@ $projek = query("SELECT * FROM projek WHERE id = $id")[0];
 
 $nama = $_SESSION['admin']['username'];
 if (isset($_POST['submit'])) {
-    $_POST['image'] = addslashes(file_get_contents($_FILES['gambar']['tmp_name']));
+    if ($_FILES['gambar']['tmp_name']) {
+        $_POST['image'] = addslashes(file_get_contents($_FILES['gambar']['tmp_name']));
+    }
+    
     $_POST['id'] =  $projek['id'];
     if (editprojek($_POST) > 0) {
-        header('Location: index.php');
+       
         $_SESSION['alert'] = 'data anda berhasil di edit';
+        header('Location: index.php');
     }
 }
 ?>
@@ -174,7 +178,7 @@ if (isset($_POST['submit'])) {
                                 <input type="text" hidden name="id" value="<?= $projek['id'] ?>">
                                 <div class="form-group">
                                     <label for="file">Gambar</label>
-                                    <input type="file" class="form-control" id="file" name="gambar" placeholder="masukan link">
+                                    <input type="file" class="form-control " id="file"  name="gambar" placeholder="masukan link">
                                 </div>
                                 <div class="form-group">
                                     <label for="link">Link</label>

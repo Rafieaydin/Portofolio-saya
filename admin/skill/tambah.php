@@ -8,8 +8,9 @@ $nama = $_SESSION['admin']['username'];
 $tag = query("SELECT * FROM tag");
 
 if (isset($_POST['submit'])) {
-    $_POST['image'] = addslashes(file_get_contents($_FILES['gambar']['tmp_name']));
-
+    if ($_FILES['gambar']['tmp_name']) {
+        $_POST['image'] = addslashes(file_get_contents($_FILES['gambar']['tmp_name']));
+    }
     if (tambahSkills($_POST) > 0) {
         header('Location: index.php');
         $_SESSION['alert'] = 'data anda berhasil di tambahkan';
@@ -178,7 +179,7 @@ if (isset($_POST['submit'])) {
                                 </div>
                                 <div class="form-group">
                                     <label for="link">judul</label>
-                                    <input type="text" class="form-control" id="link" name="judul" placeholder="masukan link">
+                                    <input type="text" class="form-control" id="link" name="judul" placeholder="masukan judl">
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="foto">tag</label>

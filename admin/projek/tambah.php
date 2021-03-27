@@ -6,14 +6,13 @@ session_start();
 
 $nama = $_SESSION['admin']['username'];
 if (isset($_POST['submit'])) {
-    $_POST['image'] = addslashes(file_get_contents($_FILES['gambar']['tmp_name']));
-    if (tambahPorjek($_POST) > 0) {
-        header('Location: index.php');
-        $_SESSION['alert'] = 'data anda berhasil di tambahkan';
-    } else {
-        header('Location: index.php');
-        $_SESSION['alert'] = 'data anda gagl di tambahkan';
+    if ($_FILES['gambar']['tmp_name']) {
+        $_POST['image'] = addslashes(file_get_contents($_FILES['gambar']['tmp_name']));
     }
+    if (tambahPorjek($_POST) > 0) {
+        $_SESSION['alert'] = 'data anda berhasil di tambahkan';
+        header('Location: index.php');
+    } 
 }
 ?>
 

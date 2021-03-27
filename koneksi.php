@@ -122,9 +122,9 @@ function editprojek($post){
     $link = htmlspecialchars($post['link']);
     $image = $post['image'];
     $id = $post['id'];
-
+    
     $query = "UPDATE projek SET judul = '$judul', link = '$link', image = '$image' WHERE id = $id";
-    var_dump(mysqli_query($conn, $query));
+    mysqli_query($conn, $query);
     return mysqli_affected_rows($conn);
 }
 function hapusPorjek($id){
