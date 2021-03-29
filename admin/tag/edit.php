@@ -3,17 +3,19 @@ require '../../koneksi.php';
 
 session_start();
 !isset($_SESSION['admin']) ? header("Location: ../index.php") : '';
-$id = $_GET['id'];
-$tag = query("SELECT * FROM tag WHERE id = $id")[0];
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $tag = query("SELECT * FROM tag WHERE id = $id")[0];
 
-$nama = $_SESSION['admin']['username'];
-if (isset($_POST['submit'])) {
-    if (editTag($_POST) > 0) {
-        header('Location: index.php');
-        $_SESSION['alert'] = 'data anda berhasil di tambahkan';
-    } else {
-        header('Location: index.php');
-        $_SESSION['alert'] = 'data anda gagl di tambahkan';
+    $nama = $_SESSION['admin']['username'];
+    if (isset($_POST['submit'])) {
+        if (editTag($_POST) > 0) {
+            header('Location: index.php');
+            $_SESSION['alert'] = 'data anda berhasil di tambahkan';
+        } else {
+            header('Location: index.php');
+            $_SESSION['alert'] = 'data anda gagl di tambahkan';
+        }
     }
 }
 ?>
@@ -55,9 +57,9 @@ if (isset($_POST['submit'])) {
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon">
+                <!-- <div class="sidebar-brand-icon">
                     <i class="fas fa-user"></i>
-                </div>
+                </div> -->
                 <div class="sidebar-brand-text mx-3">Admin <sup></sup></div>
             </a>
 

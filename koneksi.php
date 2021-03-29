@@ -103,27 +103,28 @@ function reset_password($post)
 
 function tambahPorjek($post){
     global $conn;
-    if (empty($post['judul']) or empty($post['link']) or empty($post['image'])) {
+    if (empty($post['judul']) or empty($post['link']) or empty($post['image']) or empty($post['skill_id'])) {
         return 0;
     }
     $judul =  htmlspecialchars($post['judul']);
     $link= htmlspecialchars($post['link']);
     $image = $post['image'];
-    $query = "INSERT INTO projek VALUES('','$link','$judul','$image')";
+    $skill_id = $post['skill_id'];
+    $query = "INSERT INTO projek VALUES('','$link','$judul','$image','$skill_id')";
     var_dump(mysqli_query($conn, $query));
     return mysqli_affected_rows($conn);
 }
 function editprojek($post){
     global $conn;
-    if (empty($post['judul']) or empty($post['link']) or empty($post['image'])) {
+    if (empty($post['judul']) or empty($post['link']) or empty($post['image']) or empty($post['skill_id'])) {
         return 0;
     }
     $judul =  htmlspecialchars($post['judul']);
     $link = htmlspecialchars($post['link']);
     $image = $post['image'];
     $id = $post['id'];
-    
-    $query = "UPDATE projek SET judul = '$judul', link = '$link', image = '$image' WHERE id = $id";
+    $skill_id = $post['skill_id'];
+    $query = "UPDATE projek SET judul = '$judul', link = '$link', image = '$image', skill_id = $skill_id WHERE id = $id";
     mysqli_query($conn, $query);
     return mysqli_affected_rows($conn);
 }
@@ -167,12 +168,14 @@ function hapusTag($id)
 // skill admin
 function tambahSkills($post){
     global $conn;
-    if (empty($post['judul']) or empty($post['tag']) or empty($post['image'])) {
+    if (empty($post['judul']) or empty($post['tag']) or empty($post['image']) or empty($post['deskripsi'])) {
         return 0;
     }
     $judul = htmlspecialchars($post['judul']);
     $image = $_POST['image'];
-    $query = "INSERT INTO skill VALUES('','$judul','$image')";
+    $deskripsi = htmlspecialchars($post['deskripsi']);
+
+    $query = "INSERT INTO skill VALUES('','$judul','$deskripsi','$image')";
     mysqli_query($conn,$query);
     $id = mysqli_insert_id($conn);
 
@@ -181,6 +184,32 @@ function tambahSkills($post){
         mysqli_query($conn, $query);
     }
     
+    return mysqli_affected_rows($conn);
+}
+function editSkills($post){
+    global $conn;
+    if (empty($post['judul']) or empty($post['tag']) or empty($post['image']) or empty($post['deskripsi'])) {
+        return 0;
+    }
+    $judul = htmlspecialchars($post['judul']);
+    $image = $_POST['image'];
+    $deskripsi = htmlspecialchars($post['deskripsi']);
+    $id = $post['id'];
+
+    $query = "UPDATE skill SET nama = '$judul', deskripsi = '$deskripsi', gambar = '$image' WHERE id = $id";
+    
+    mysqli_query($conn, $query);
+
+    // hapus tag lama
+    $query = "DELETE FROM tag_skill WHERE id_skill = $id";
+    mysqli_query($conn, $query);
+
+    // masukan tag baru
+    foreach ($_POST['tag'] as $key => $value) {
+        $query = "INSERT INTO tag_skill VALUES('', $id, $value)";
+        mysqli_query($conn, $query);
+    }
+
     return mysqli_affected_rows($conn);
 }
 function hapusSkils($id)

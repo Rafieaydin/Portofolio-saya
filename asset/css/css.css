@@ -29,7 +29,9 @@
     a.active{
         color: white !important;
     }
-  
+    .navbar{
+        background-color: transparent;
+    }
     section#home{
         background-image: linear-gradient(to right, #232526, #414345);
         color: white;
@@ -118,7 +120,6 @@
             background: #232526;
             border-radius: 10px;
         }
-
     .card-link {
         text-decoration: none;
     }

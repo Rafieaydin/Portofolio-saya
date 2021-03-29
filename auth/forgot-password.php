@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
             background-image: linear-gradient(to right, #232526, #414345);
         }
 
-        button:first-of-type {
+        button.btn-user {
             background-image: linear-gradient(to right, #232526, #414345);
             color: white;
         }
@@ -78,7 +78,7 @@ if (isset($_POST['submit'])) {
                                         <button type="submit" name="submit" class="btn btn-primary btn-user btn-block">
                                             Change password
                                         </button>
-                                        <a href="../index.php" class="btn btn-success btn-user btn-block">back</a>
+                                        <a href="../index.php" class="btn-a btn btn-success btn-user btn-block">back</a>
                                         <hr>
                                     </form>
                                     <hr>

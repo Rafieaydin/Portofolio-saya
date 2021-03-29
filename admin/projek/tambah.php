@@ -5,6 +5,7 @@ session_start();
 !isset($_SESSION['admin']) ? header("Location: ../index.php") : '';
 
 $nama = $_SESSION['admin']['username'];
+$skill = query("SELECT * FROM skill");
 if (isset($_POST['submit'])) {
     if ($_FILES['gambar']['tmp_name']) {
         $_POST['image'] = addslashes(file_get_contents($_FILES['gambar']['tmp_name']));
@@ -12,7 +13,7 @@ if (isset($_POST['submit'])) {
     if (tambahPorjek($_POST) > 0) {
         $_SESSION['alert'] = 'data anda berhasil di tambahkan';
         header('Location: index.php');
-    } 
+    }
 }
 ?>
 
@@ -53,9 +54,9 @@ if (isset($_POST['submit'])) {
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon">
+                <!-- <div class="sidebar-brand-icon">
                     <i class="fas fa-user"></i>
-                </div>
+                </div> -->
                 <div class="sidebar-brand-text mx-3">Admin <sup></sup></div>
             </a>
 
@@ -165,21 +166,30 @@ if (isset($_POST['submit'])) {
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-secondary">Tambah Data Edit</h6>
+                            <h6 class="m-0 font-weight-bold text-secondary">Tambah Data Projek</h6>
                         </div>
                         <div class="card-body">
                             <form action="" method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="file">Gambar</label>
-                                    <input type="file" class="form-control" id="file" name="gambar" placeholder="masukan link">
+                                    <input type="file" class="form-control" id="file" name="gambar" placeholder="masukan Gambar">
                                 </div>
                                 <div class="form-group">
                                     <label for="link">Link</label>
                                     <input type="text" class="form-control" id="link" name="link" placeholder="masukan link">
                                 </div>
-                                <div class="form-group mb-4">
+                                <div class="form-group">
                                     <label for="foto">Judul</label>
                                     <input type="text" class="form-control" name="judul" placeholder="masukan judul">
+                                </div>
+                                <div class="form-group mb-4">
+                                    <label for="exampleFormControlSelect1">Pilih skill</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="skill_id">
+                                        <option value="">-- Pilih Skill --</option>
+                                        <?php foreach ($skill as $key => $value) { ?>
+                                            <option value="<?= $value['id'] ?>"><?= $value['nama'] ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                                 <a href="index.php" class="btn btn-danger">Kembali</a>
                                 <button name="submit" class="btn btn-success">Tambah</button>

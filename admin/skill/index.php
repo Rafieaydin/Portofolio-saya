@@ -4,7 +4,7 @@ require '../../koneksi.php';
 session_start();
 !isset($_SESSION['admin']) ? header("Location: ../index.php") : '';
 $nama = $_SESSION['admin']['username'];
-$skill = query("SELECT skill.id as id_skill, skill.nama, skill.gambar, GROUP_CONCAT(tag.nama)  AS nama_tag FROM tag_skill 
+$skill = query("SELECT  skill.id as id_skill, skill.nama, skill.gambar, GROUP_CONCAT(tag.nama)  AS nama_tag, skill.deskripsi FROM tag_skill 
 LEFT JOIN  skill ON tag_skill.id_skill = skill.id
 LEFT JOIN  tag ON tag_skill.id_tag = tag.id
 GROUP BY skill.id");
@@ -47,9 +47,9 @@ GROUP BY skill.id");
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon">
+                <!-- <div class="sidebar-brand-icon">
                     <i class="fas fa-user"></i>
-                </div>
+                </div> -->
                 <div class="sidebar-brand-text mx-3">Admin <sup></sup></div>
             </a>
 
@@ -206,6 +206,12 @@ GROUP BY skill.id");
                                                     <?php } ?>
                                                 </td>
                                                 <td>
+                                                    <a href="detail.php?id=<?= $value['id_skill'] ?>" class=" btn-sm btn btn-primary btn-circle">
+                                                        <i class="fa fa-search"></i>
+                                                    </a>
+                                                    <a href="edit.php?id=<?= $value['id_skill'] ?>" class=" btn-sm btn btn-warning btn-circle">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </a>
                                                     <button data-id="<?= $value['id_skill'] ?>" class=" btn-sm btn btn-danger btn-circle hapus">
                                                         <i class="fas fa-trash"></i>
                                                     </button>

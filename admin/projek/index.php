@@ -44,15 +44,15 @@ $projek  = query("SELECT * FROM projek ORDER BY id DESC");
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon">
+                <!-- <div class="sidebar-brand-icon">
                     <i class="fas fa-user"></i>
-                </div>
+                </div> -->
                 <div class="sidebar-brand-text mx-3">Admin <sup></sup></div>
             </a>
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item ">
-                <a class="nav-link " href="dashboard.php">
+                <a class="nav-link " href="../dashboard.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -83,7 +83,7 @@ $projek  = query("SELECT * FROM projek ORDER BY id DESC");
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="index.php">
+                <a class="nav-link " href="../Contact/index.php">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Data Contact</span>
                 </a>

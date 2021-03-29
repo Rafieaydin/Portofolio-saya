@@ -4,18 +4,11 @@ require '../../koneksi.php';
 session_start();
 !isset($_SESSION['admin']) ? header("Location: ../index.php") : '';
 $nama = $_SESSION['admin']['username'];
-
-$tag = query("SELECT * FROM tag");
-
-if (isset($_POST['submit'])) {
-    if ($_FILES['gambar']['tmp_name']) {
-        $_POST['image'] = addslashes(file_get_contents($_FILES['gambar']['tmp_name']));
-    }
-    if (tambahSkills($_POST) > 0) {
-        header('Location: index.php');
-        $_SESSION['alert'] = 'data anda berhasil di tambahkan';
-    }
-}
+$id = $_GET['id'];
+$skill = query("SELECT  skill.id as id_skill, skill.nama, skill.gambar, GROUP_CONCAT(tag.nama)  AS nama_tag, skill.deskripsi FROM tag_skill 
+LEFT JOIN  skill ON tag_skill.id_skill = skill.id
+LEFT JOIN  tag ON tag_skill.id_tag = tag.id WHERE skill.id = $id
+GROUP BY skill.id");
 ?>
 
 <!DOCTYPE html>
@@ -37,9 +30,7 @@ if (isset($_POST['submit'])) {
 
     <!-- Custom styles for this template-->
     <link href="../../asset/css/sb-admin-2.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../asset/pakage/datatables/dataTables.bootstrap4.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css" integrity="sha512-kq3FES+RuuGoBW3a9R2ELYKRywUEQv0wvPTItv3DSGqjpbNtGWVdvT8qwdKkqvPzT93jp8tSF4+oN4IeTEIlQA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../../asset/pakage/datatables/dataTables.bootstrap4.min.css">
     <style>
         .sidebar {
             background-image: linear-gradient(to right, #232526, #414345);
@@ -77,7 +68,7 @@ if (isset($_POST['submit'])) {
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item ">
-                <a class="nav-link " href="index.php">
+                <a class="nav-link " href="../projek/index.php">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Data Projek</span>
                 </a>
@@ -91,7 +82,7 @@ if (isset($_POST['submit'])) {
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Data skill</h6>
                         <a class="collapse-item" href="../tag/index.php">Table tag</a>
-                        <a class="collapse-item" href="../skill/index.php">Table skills</a>
+                        <a class="collapse-item" href="index.php">Table skills</a>
                     </div>
                 </div>
             </li>
@@ -165,37 +156,63 @@ if (isset($_POST['submit'])) {
                 <!-- End of navbar -->
 
                 <!-- Begin Page Content -->
+
                 <div class="container-fluid">
                     <!-- DataTales Example -->
+                    <?php if (isset($_SESSION['alert'])) { ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <?= $_SESSION['alert'] ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <?php unset($_SESSION['alert']) ?>
+                        </div>
+                    <?php } ?>
+
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-secondary">Tambah Data Skill</h6>
+                            <div class="row mt-2">
+                                <div class="col-md-5">
+                                    <h5 class="m-0 font-weight-bold text-secondary ">Detail Skill <?= $skill[0]['nama'] ?> </h5>
+                                </div>
+                            </div>
+
+
                         </div>
                         <div class="card-body">
-                            <form action="" method="POST" enctype="multipart/form-data">
-                                <div class="form-group">
-                                    <label for="file">Gambar</label>
-                                    <input type="file" class="form-control" id="file" name="gambar" placeholder="masukan link">
-                                </div>
-                                <div class="form-group">
-                                    <label for="link">judul</label>
-                                    <input type="text" class="form-control" id="judul" name="judul" placeholder="masukan judul">
-                                </div>
-                                <div class="form-group ">
-                                    <label for="foto">tag</label>
-                                    <select class="smartsearch_keyword" name="tag[]" id="keyword" style="width:100%;">
-                                        <?php foreach ($tag as $key => $value) { ?>
-                                            <option value="<?= $value['id'] ?>" ><?= $value['nama'] ?></option>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>no</th>
+                                            <th>gambar</th>
+                                            <th>judul</th>
+                                            <td>skills</td>
+                                            <td>deskripsi</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($skill as $key => $value) { ?>
+                                            <tr>
+                                                <td><?= $key + 1 ?></td>
+                                                <td><img src="data:image/jpeg;base64,<?= base64_encode($value['gambar']) ?>" width="100px" alt=""></td>
+                                                <td><?= $value['nama'] ?></td>
+                                                <td>
+                                                    <?php $ex = explode(',', $value['nama_tag']);
+                                                    foreach ($ex as $key => $value1) { ?>
+                                                        <span class="badge bg-secondary text-white"><?= $value1 ?></span>
+                                                    <?php } ?>
+                                                </td>
+                                                <th><?= $value['deskripsi'] ?></th>
+                                            </tr>
                                         <?php } ?>
-                                    </select>
-                                </div>
-                                <div class="form-group mb-4">
-                                    <label for="exampleFormControlTextarea1">Deskripsi</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="deskripsi"></textarea>
-                                </div>
-                                <a href="index.php" class="btn btn-danger">Kembali</a>
-                                <button name="submit" class="btn btn-success">Tambah</button>
-                            </form>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="index.php" class="btn btn-secondary btn-sm ">Kembali
+                                </a>
+                            </div>
                         </div>
                     </div>
 
@@ -205,6 +222,15 @@ if (isset($_POST['submit'])) {
             </div>
             <!-- End of Main Content -->
 
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
         </div>
         <!-- End of Content Wrapper -->
 
@@ -227,15 +253,10 @@ if (isset($_POST['submit'])) {
     <!-- Page level custom scripts -->
     <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="../../asset/pakage/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-    <script>
-        $(document).ready(function name(params) {
-            $(".smartsearch_keyword").select2({
-                multiple: true,
-            });
-        })
-    </script>
+    <!-- sweet alert -->
+    <script script src=" https://cdn.jsdelivr.net/npm/sweetalert2@10 "></script>
+
 </body>
 
 </html>

@@ -44,9 +44,9 @@ $projek  = query("SELECT * FROM contact ORDER BY id DESC");
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon">
+                <!-- <div class="sidebar-brand-icon">
                     <i class="fas fa-user"></i>
-                </div>
+                </div> -->
                 <div class="sidebar-brand-text mx-3">Admin <sup></sup></div>
             </a>
 

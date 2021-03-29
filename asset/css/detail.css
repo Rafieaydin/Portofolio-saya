@@ -1,0 +1,69 @@
+      *{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        background-image: linear-gradient(to right, #232526, #414345);
+    }
+    html {
+        scroll-behavior: smooth;
+    }
+    html::-webkit-scrollbar {
+        display: none;
+    }
+    html {
+        -ms-overflow-style: none;
+    }
+    nav.navbar {
+        width: 100%;
+        z-index: 1;
+    }
+     i.fab:hover {
+        color: black;
+    }
+
+    a.nav-link {
+        color: #7f8c8d !important;
+    }
+
+    a.nav-link:hover {
+        color: white !important;
+    }
+
+    a.active {
+        color: white !important;
+    }
+
+    .navbar {
+        background-color: transparent;
+    }
+.card-link {
+    text-decoration: none;
+}
+
+div.card:hover {
+    box-shadow: 10px 10px 10px rgb(0, 0, 0, 0.2);
+    background: #232526;
+}
+
+div.card img:hover {
+    opacity: 0.5s;
+}
+
+.myprojk {
+    margin-top: -40px;
+}
+
+div.card {
+    background: transparent;
+    background: #414345;
+    z-index: 0;
+    box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.2);
+}.kembali{
+    color: #7f8c8d ;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+}.kembali:hover{
+    color: white ;
+}
